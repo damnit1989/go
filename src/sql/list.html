@@ -1,0 +1,7 @@
+var html string = `{{define "list"}}{{/* 留言列表页面 */}}
+
+给我留言
+
+{{range .}} {{end}}
+{{.Id}}	{{.Name}}	{{.Content}}	{{.ShowTime}}
+{{end}} {{define "liuyan"}}{{/* 发布留言页面 */}} {{end}}`
