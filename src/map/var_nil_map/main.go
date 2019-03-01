@@ -8,6 +8,9 @@ func main(){
 	fmt.Println(m)
 	fmt.Println(m == nil)
 	
+	//if m == "" || m == 0{
+	//    fmt.Println("m is what")
+	//}
 	//fmt.Printf("nil: %T", nil)
 	
 	//if nil == "" || nil == 0{
