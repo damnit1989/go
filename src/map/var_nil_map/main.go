@@ -7,7 +7,13 @@ func main(){
 	
 	fmt.Println(m)
 	fmt.Println(m == nil)
-	
+
+	n :=  map[string]string{}	
+	fmt.Println(n)
+	fmt.Println(n == nil)
+	if len(n) == 0  {
+	    fmt.Printf("the n is empty map")
+	}
 	//if m == "" || m == 0{
 	//    fmt.Println("m is what")
 	//}
