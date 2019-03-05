@@ -16,7 +16,7 @@ func main(){
 
 	}
 	id := 363
-	rows, err := db.Query("SELECT name FROM user_log WHERE id=?", id)
+	rows, err := db.Query("SELECT name,content  FROM user_log WHERE id >= ?", id)
 	if err != nil{
 		log.Fatal(err)
 	}
@@ -24,11 +24,11 @@ func main(){
 	defer rows.Close()
 	
 	for rows.Next(){
-		var name string
-		if err := rows.Scan(&name);err != nil{
+		var name, content string
+		if err := rows.Scan(&name, &content);err != nil{
 			log.Fatal(err)
 		}
-		fmt.Printf("%s is %d\n",name,id)
+		fmt.Printf("name:%s,content:%s,id:%d\n",name, content, id)
 	}
 	if err := rows.Err();err != nil{
 		log.Fatal(err)

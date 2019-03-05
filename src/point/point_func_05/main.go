@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-普通变量参数
+//普通变量参数
 func swap(x, y int){
 	tmp := x
 	x = y
