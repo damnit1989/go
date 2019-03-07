@@ -56,7 +56,12 @@ func handle(commands chan Command, conn net.Conn){
 	scanner := bufio.NewScanner(conn)
 	for scanner.Scan(){
 		ln := scanner.Text()
+		
+		//通过空格将字符串分割成切片
 		fs := strings.Fields(ln)
+		//fmt.Println(fs)
+		
+		io.WriteString(conn, ln+"\n")
 		result := make(chan string)
 		commands <- Command{
 			Fields : fs,
@@ -81,7 +86,8 @@ func main(){
 		if err != nil{
 			log.Fatalln(err)
 		}
-		
+		//fmt.Println(commands)
+		//fmt.Printf("%T", commands)
 		go handle(commands, conn)
 	}
 	
