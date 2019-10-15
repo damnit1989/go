@@ -1,34 +1,46 @@
+//原接口：安卓充电线
+//目标：苹果接口
+//适配方式：安卓-ios转换器
+
 package main
 
 import "fmt"
 
-//固有接口
-type Before interface{
-	Attack()
-	Defence()
+type Target interface{
+	Power()
 }
 
-type ForeignPerson struct{
+type Andro struct{
 	Name string
 }
-
-func (this *ForeignPerson) Attack() {
-	fmt.Printf("attack")
+func (a Andro) Diff() string{
+	return a.Name
 }
 
-func (this *ForeignPerson) Defence() {
-	fmt.Printf("defence")
+type Ios struct{
+	Name  string
 }
 
-type ChinaPerson struct {
-	Name string
+func (i Ios) Power(){
+	fmt.Println(i.Name)
 }
 
+type Adapt struct{
+	Andro
+}
 
+func (a Adapt) Power(){
+	fmt.Println(a.Diff())
+}
 
-func main() {
-	p1 := ForeignPerson{"james"}
-	p2 := ForeignPerson{"kebi"}
-	
-	ym := ChinaPerson{"姚明"}
+func info(t Target){
+	t.Power()
+}
+func main(){
+	ios := Ios{"one"}
+	info(ios)
+
+	andro := Andro{"two"}
+	ad := Adapt{andro}
+	info(ad)
 }
