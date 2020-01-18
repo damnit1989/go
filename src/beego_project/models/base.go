@@ -17,4 +17,5 @@ func init() {
 	// orm.RegisterDataBase("default", "mysql", "root:123456@/beego?charset=utf8")
 	orm.RegisterDataBase("default", "mysql", user+":"+pass+"@/"+db+"?charset=utf8")
 	orm.RegisterModelWithPrefix(prefix, new(User),new(File))
+	orm.Debug = true
 }
