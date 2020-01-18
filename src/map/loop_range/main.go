@@ -13,4 +13,8 @@ func main(){
 	for k, v := range m{
 		fmt.Println("k=",k, "v=", v)
 	}
+
+	for i:=0;i<len(m);i++{
+		fmt.Println(m[i])
+	}
 }
