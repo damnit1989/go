@@ -6,6 +6,7 @@ import(
 )
 
 func hello(){
+	time.Sleep(1 * time.Second)
 	fmt.Println("Hello world gorouting")
 }
 
