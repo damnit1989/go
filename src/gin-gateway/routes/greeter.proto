@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+service Greeter {
+	rpc Hello(Request) returns (Response) {}
+}
+
+message Request {
+	required string name = 1;
+}
+
+message Response {
+	required string msg = 1;
+}
