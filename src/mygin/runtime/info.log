@@ -1,0 +1,16 @@
+[GIN-debug] GET    /login/login              --> mygin/controllers.Login (3 handlers)
+[GIN-debug] GET    /verify-token             --> mygin/controllers.VerifyToken (3 handlers)
+[GIN-debug] GET    /test                     --> mygin/controllers.Test (3 handlers)
+[GIN-debug] GET    /v1/index/:id             --> mygin/controllers/user.(*UserController).InfoAction-fm (4 handlers)
+[GIN-debug] GET    /v1/detail/:id            --> mygin/controllers/user.(*UserController).DetailAction-fm (4 handlers)
+[GIN-debug] POST   /v1/add                   --> mygin/controllers/user.(*UserController).AddAction-fm (4 handlers)
+[GIN-debug] POST   /v1/edit                  --> mygin/controllers/user.(*UserController).EditAction-fm (4 handlers)
+[GIN-debug] GET    /v1/delete/:id            --> mygin/controllers/user.(*UserController).DeleteAction-fm (4 handlers)
+[GIN-debug] GET    /v1/get-user-profile/:id  --> mygin/controllers/user.(*UserController).GetUserProfileAction-fm (4 handlers)
+[GIN-debug] GET    /v2/a                     --> mygin/controllers.InfoPoint (3 handlers)
+[GIN-debug] POST   /upload/pic               --> mygin/controllers/upload.UploadPic (3 handlers)
+[GIN-debug] POST   /upload/breakpoint-upload --> mygin/controllers/upload.BreakPointUpload (3 handlers)
+[GIN-debug] GET    /admin/user               --> mygin/route.SetRoute.func1 (5 handlers)
+[GIN-debug] GET    /ping                     --> main.main.func1 (3 handlers)
+[GIN-debug] Environment variable PORT is undefined. Using port :8080 by default
+[GIN-debug] Listening and serving HTTP on :8080
