@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var (
@@ -29,11 +29,11 @@ func init() {
 
 	// 开启db调试，可打印执行sql
 	db.LogMode(true)
-	
+
 	// defer db.Close()
 }
 
 // GetDb return db conn
-func GetDb() *gorm.DB{
+func GetDb() *gorm.DB {
 	return db
 }

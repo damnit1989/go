@@ -1,7 +1,9 @@
 package upload
 
 import (
+	"io/ioutil"
 	"log"
+	"mygin/utils"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -12,15 +14,26 @@ import (
 var dst = "./uploads/"
 
 func UploadPic(c *gin.Context) {
+	defer func() {
+		if err := recover(); err != nil {
+			c.JSON(200, gin.H{
+				"meg": err,
+			})
+		}
+	}()
+
 	file, err := c.FormFile("file")
 	if err != nil {
 		log.Panicln(err)
 	}
-	// c.JSON(200, file.Header)
-	// fileInfo, err := file.Open()
 
-	c.SaveUploadedFile(file, dst+file.Filename)
-	c.String(200, "file %s  upload success", file.Filename)
+	uploadConfig := map[string]interface{}{
+		"FileType": []string{"application/zip", "application/rar"},
+		"FileSzie": 1024 * 1024 * 2,
+	}
+	upload := utils.NewUpload(uploadConfig)
+	fileInfo := upload.DoUpload(file)
+	c.JSON(200, fileInfo)
 }
 
 func MultUpload(c *gin.Context) {
@@ -43,10 +56,19 @@ func BreakPointUpload(c *gin.Context) {
 	if err != nil {
 		log.Panic(err)
 	}
+
 	tmpDir := dst + "tmp/" + fileMd5
 	if currentNumber == "1" {
 		os.MkdirAll(tmpDir, 0777)
 	}
+
+	// ch := make(chan string)
+
+	// go func(cn chan string) {
+	// 	cn <- "string"
+	// }(ch)
+
+	// <-chan
 
 	// 保存当前分片
 	c.SaveUploadedFile(fileHeader, tmpDir+"/"+fileMd5+"_"+currentNumber)
@@ -62,10 +84,14 @@ func BreakPointUpload(c *gin.Context) {
 		}
 		fileInfos, _ := file.Readdir(0)
 		for _, v := range fileInfos {
+			tmpFile := tmpDir + "/" + v.Name()
+			content, err := ioutil.ReadFile(tmpFile)
+			if err != nil {
+				panic(err)
+			}
+			ioutil.WriteFile(zipFile, content, 0755)
+			os.Remove(tmpFile)
 
-			// pieceFile, _ := os.Open(tmpDir + "/" + v.Name())
-			// pieceFile.Read()
-			// pieceFile.Read(pieceFile.
 		}
 		// 转移到目标目录
 	}

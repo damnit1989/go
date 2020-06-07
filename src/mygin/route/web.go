@@ -24,10 +24,6 @@ func init() {
 // SetRoute return route
 func SetRoute() *gin.Engine {
 
-	router.GET("/login/login", controllers.Login)
-	router.GET("/verify-token", controllers.VerifyToken)
-	router.GET("/test", controllers.Test)
-
 	// 简单的路由组: v1
 	v1 := router.Group("/v1", middlewares.AuthToken())
 	{
@@ -46,12 +42,14 @@ func SetRoute() *gin.Engine {
 		v2.GET("/a", controllers.InfoPoint)
 	}
 
+	// 上传文件
 	file := router.Group("/upload")
 	{
 		file.POST("/pic", upload.UploadPic)
 		file.POST("/breakpoint-upload", upload.BreakPointUpload)
 	}
 
+	// 后端
 	admin := router.Group("/admin", middlewares.Test(), gin.BasicAuth(accounts))
 	{
 		admin.GET("/user", func(c *gin.Context) {
@@ -65,5 +63,12 @@ func SetRoute() *gin.Engine {
 			}
 		})
 	}
+
+	router.GET("/login/login", controllers.Login)
+	router.GET("/verify-token", controllers.VerifyToken)
+	router.GET("/test", controllers.Test)
+	router.GET("/bind-url", controllers.TestBindUrl)
+	router.GET("/redis", controllers.TestRedis)
+
 	return router
 }
